@@ -52,19 +52,20 @@ A thorough Crime Prediction Model is presented by Team Sherlocked to predict cri
 ## Components 
 
 1. **Interactive Dashboard**
-   - Criminal Dashboard
+   
+   - __Criminal Dashboard__
      ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/e0bfabe6-43f7-446d-8b66-023c81b619a7)
 
-   - Victim Dashboard
+   - __Victim Dashboard__
      ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/8d8a6a58-5910-489e-9b4a-155a9260cae2)
 
-   - Crime Dashboard
+   - __Crime Dashboard__
       ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/58084fb2-ab81-412e-8fb9-cafb9b34c76d)
 
    
 
 
-2. **Crime Watch**: Animated Crime Hotspots Visualization
+3. **Crime Watch**: Animated Crime Hotspots Visualization
 
 
    
@@ -75,21 +76,26 @@ A thorough Crime Prediction Model is presented by Team Sherlocked to predict cri
 
 3. **Predictive Analytics**
    - Accused-Victim Demographics
-     ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/4b980aca-b4c2-4ac7-ac67-688e6183969d)
+    ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/03fe69d7-3166-46fc-98e0-6e7dc6eeb81c)
 
    - Crime Time
-     ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/1228848b-a0b2-4fcb-a32d-758d2884b81d)
+ ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/a31b7ff9-566e-4796-a707-b2f21280ba34)
+
 
    - Crime Hotspots
      ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/aaabb895-48dc-4201-acdf-89741fe570b0)
 
    - Crime Type
-     ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/5a6159f9-cc19-46d1-a5ce-2e048e8d0168)
+    ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/68fe4e7a-7118-4b17-a4e9-f118e5e42a0c)
+
 
 
 4. **Beat Optimization**
 
-  ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/1d055723-9d9d-40c9-b310-5fb53be6e400)
+ ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/55466231-06a0-4427-83d5-5a4890cce837)
+ ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/4d42f699-ead6-421e-87c7-86dabf87065a)
+
+
 
 
     
