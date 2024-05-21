@@ -91,16 +91,15 @@ A thorough Crime Prediction Model is presented by Team Sherlocked to predict cri
      ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/aaabb895-48dc-4201-acdf-89741fe570b0)
 
    - Crime Type
-     ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/68fe4e7a-7118-4b17-a4e9-f118e5e42a0c)
+    ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/37924aa5-5003-4db3-aab6-ba29c862ba86)
+
 
 
 
 4. **Beat Optimization**
 
- ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/55466231-06a0-4427-83d5-5a4890cce837)
- ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/4d42f699-ead6-421e-87c7-86dabf87065a)
-
-
+![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/48541509-6a9f-458a-8eea-d81fa511404c)
+![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/92f7c805-a676-4eee-80ca-6e4a7a682159)
 
 
     
