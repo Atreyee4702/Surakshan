@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Surakshan</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="...">
+    <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+
+    <style>
+       
+        .cont {
+            width: 100%;
+            display: flex;
+            padding: 50px;
+            background-color: black;
+            
+        }
+
+        #analyse {
+            width: 100%;
+            display: flex;
+            padding-left: 50px;
+            background-color: black;
+            margin-bottom: 5%;
+
+        }
+
+
+        #map2,
+        #map1,
+        #graph_p {
+            height: 325px;
+            width: 50%;
+            margin-left: 10%;
+            margin-top: 0%;
+            /* Adjust width as needed */
+            z-index: 9
+        }
+        
+        #graph_p {
+            height: 325px;
+            width: 50%;
+            margin-left: 6%;
+            margin-top: 2%;
+            /* Adjust width as needed */
+            z-index: 9
+        }
+
+        canvas {
+            width: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: black;
+
+            width: 100%;
+        }
+
+        .card1 {
+            background-color: rgb(2, 2, 2, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 60%;
+            padding: 20px;
+            color: #f5eded;
+            z-index: 9999;
+
+        }
+       
+
+
+        h1 {
+            text-align: center;
+            color: rgb(255, 255, 255);
+            margin-bottom: 20px;
+            font-weight: bold;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        form label {
+            margin-bottom: 8px;
+            color: wheat;
+        }
+
+        form select,
+        form input[type="submit"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #dfe6e9;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #2d3436;
+        }
+
+        form input[type="submit"] {
+            background-color: #2980b9;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #2c3e50;
+        }
+
+        #prediction-result {
+            margin-top: 20px;
+            background-color: rgba(11, 11, 11, 0.171);
+            /* Translucent black background */
+            border-radius: 10px;
+            padding: 20px;
+            color: #fff;
+            border: 2px solid;
+            border-radius: 10px;
+            border-color: white;
+        }
+
+        #prediction-result h2 {
+            margin-top: 0;
+
+        }
+
+        #prediction-result p {
+            margin-bottom: 10px;
+
+        }
+
+        .time {
+            display: flex;
+
+        }
+
+        .day {
+            margin-left: 5%;
+        }
+
+
+        .b1 {
+            position: absolute;
+            height: 300px;
+            width: 300px;
+            border-radius: 50%;
+            background-image: linear-gradient(80deg, rgb(67, 4, 4), rgb(94, 3, 3));
+            filter: blur(80px);
+
+        }
+
+        .b2 {
+            position: absolute;
+            height: 300px;
+            width: 300px;
+            border-radius: 50%;
+            background-image: linear-gradient(80deg, rgb(67, 4, 4), rgb(94, 3, 3));
+            filter: blur(80px);
+            top: 450px;
+            z-index: 0;
+        }
+
+        .b3 {
+            position: absolute;
+            height: 300px;
+            width: 300px;
+            border-radius: 50%;
+            background-image: linear-gradient(80deg, rgb(67, 4, 4), rgb(94, 3, 3));
+            filter: blur(80px);
+            left: 1250px
+        }
+
+        /* navbar */
+        #header {
+            transition: all 0.5s;
+            z-index: 997;
+            padding: 15px 0;
+        }
+
+        #header.header-scrolled,
+        #header.header-inner-pages {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        #header .logo {
+            font-size: 32px;
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        #header .logo a {
+            color: #fff;
+        }
+
+        #header .logo a span {
+            color: #ffc451;
+        }
+
+        #header .logo img {
+            width: 250px;
+            height: 100px;
+        }
+
+        /*--------------------------------------------------------------
+#  Get Startet Button
+--------------------------------------------------------------*/
+        .get-started-btn {
+            color: #fff;
+            border-radius: 4px;
+            padding: 7px 25px 8px 25px;
+            white-space: nowrap;
+            transition: 0.3s;
+            font-size: 14px;
+            display: inline-block;
+            border: 2px solid #ffc451;
+        }
+
+        .get-started-btn:hover {
+            background: #ffbb38;
+            color: #343a40;
+        }
+
+        @media (max-width: 992px) {
+            .get-started-btn {
+                padding: 7px 20px 8px 20px;
+                margin-right: 15px;
+            }
+        }
+
+        .Radio input[type="radio"]+label {
+            padding-left: 3rem;
+        }
+
+        .Radio input[type="radio"]+label::before {
+            width: 2rem;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: #eee;
+        }
+
+        .Radio input[type="radio"]+label::after {
+            left: .2rem;
+            width: 1.4rem;
+            transform: translateY(-50%) scale(0);
+        }
+
+        .Radio input[type="radio"]:not(:checked)+label::after {
+            animation: radio 0.5s linear;
+        }
+
+        .Radio input[type="radio"]:checked+label::after {
+            transform: translateY(-50%) scale(1);
+        }
+
+        /*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+        /**
+* Desktop Navigation 
+*/
+        .spinner {
+            height: 120px;
+            width: 120px;
+            border: 6px solid;
+            border-color: white transparent white transparent;
+            border-radius: 50%;
+            animation: spin 1.3s linear infinite;
+
+            margin-left: 40%;
+            margin-top: 15%;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header" class="">
+        <div class="container d-flex align-items-center justify-content-lg-between">
+
+            <h1 class="logo me-auto me-lg-0"><a href="#">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" width="50px"
+                        style="margin-left: -30%;margin-right: -100%;">
+                </a>
+            </h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a class="nav-link scrollto " href="{{ url_for('index') }}">Home</a></li>
+                    <li><a class="nav-link scrollto" href="{{ url_for('criminal') }}">Criminal Dashboard</a></li>
+                    <li><a class="nav-link scrollto" href="{{ url_for('victim') }}">Victim Visualization Tool</a></li>
+                    <li><a class="nav-link scrollto " href="{{ url_for('crimewatch') }}">Crime Watch</a></li>
+                    <li>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Predictive Analytics
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"
+                            style="background-color: rgba(52, 45, 45, 0.5);color: white;width: 100%; z-index:99999">
+                            <a class="dropdown-item" href="{{ url_for('demographics') }}"
+                                style="padding-left: 2%;">Criminal
+                                Demographics</a>
+                            <a class="dropdown-item" href="{{ url_for('crimetime') }}" style="padding-left: 2%;">Crime
+                                Time</a>
+                           
+                            <a class="dropdown-item" href="{{ url_for('crimetype') }}" style="padding-left: 2%;">Crime
+                                Type</a>
+                            <!-- <a class="dropdown-item" href="#"></a> -->
+                        </div>
+                    </li>
+
+                    <li><a class="nav-link scrollto active" href="{{ url_for('beatpred') }}">Beat Management</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+
+
+        </div>
+    </header><!-- End Header -->
+    <div class="cont">
+        <div class="b1"></div>
+        <div class="b3"></div>
+        <div class="card1">
+            <h1>Places to Patrol</h1>
+            <form id="crime-form">
+                <label for="area">Area:</label>
+                <select id="area" name="Area">
+                    <option value="Bagalkot">Bagalkot</option>
+                    <option value="Koppal">Koppal</option>
+                    <option value="Dharwad">Dharwad</option>
+                    <option value="Gadag">Gadag</option>
+                    <option value="Haveri">Haveri</option>
+                    <option value="Hubballi Dharwad City">Hubballi Dharwad City</option>
+                    <option value="Ballari">Ballari</option>
+                    <option value="Belagavi Dist">Belagavi Dist</option>
+                    <option value="Bengaluru City">Bengaluru City</option>
+                    <option value="Bengaluru Dist">Bengaluru Dist</option>
+                    <option value="Chamarajanagar">Chamarajanagar</option>
+                    <option value="Chickballapura">Chickballapura</option>
+                    <option value="Chikkamagaluru">Chikkamagaluru</option>
+                    <option value="Dakshina Kannada">Dakshina Kannada</option>
+                    <option value="Hassan">Hassan</option>
+                    <option value="Kodagu">Kodagu</option>
+                    <option value="Mysuru City">Mysuru City</option>
+                    <option value="Tumakuru">Tumakuru</option>
+                    <option value="Uttara Kannada">Uttara Kannada</option>
+                    <option value="Chitradurga">Chitradurga</option>
+                    <option value="Shivamogga">Shivamogga</option>
+                    <option value="Kalaburagi">Kalaburagi</option>
+                    <option value="Bidar">Bidar</option>
+                    <option value="Vijayapur">Vijayapur</option>
+                    <option value="Kalaburagi City">Kalaburagi City</option>
+                    <option value="Mandya">Mandya</option>
+                    <option value="Mangaluru City">Mangaluru City</option>
+                    <option value="Raichur">Raichur</option>
+                    <option value="Udupi">Udupi</option>
+                    <option value="Vijayanagara">Vijayanagara</option>
+                    <option value="Belagavi City">Belagavi City</option>
+                    <option value="Mysuru Dist">Mysuru Dist</option>
+                    <option value="Yadgir">Yadgir</option>
+                    <option value="Ramanagara">Ramanagara</option>
+                    <option value="Kolar">Kolar</option>
+                    <option value="K.G.F">K.G.F</option>
+                    <option value="Davanagere">Davanagere</option>
+                    <option value="Karnataka Railways">Karnataka Railways</option>
+                    <option value="Coastal Security Police">Coastal Security Police</option>
+                    <option value="ISD Bengaluru">ISD Bengaluru</option>
+                </select>
+                <div class="time">
+                    <div class="month" style="width: 45%;">
+                        <label for="month">Month:</label>
+                        <br>
+                        <select id="month" name="Month" style="width: 100%;">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="day" style="width: 50%;">
+                        <label for="day">Day of Week:</label>
+                        <br>
+                        <select id="day" name="DayOfWeek" style="width: 100%;">
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                </div>
+                <label for="crime">Crime Group:</label>
+                <select id="crime" name="CrimeGroup_Name">
+                    <option value="CRIMES RELATED TO CHILDREN">CRIMES RELATED TO CHILDREN</option>
+                    <option value="MURDER/HOMICIDES">MURDER/HOMICIDES</option>
+
+                    <option value="COMMUNAL/PUBLIC RIOTS">COMMUNAL/PUBLIC RIOTS</option>
+                    <option value="DEATHS DUE TO RASHNESS/NEGLIGENCE">DEATHS DUE TO RASHNESS/NEGLIGENCE</option>
+                    <option value="CRIMES RELATED TO WOMEN">CRIMES RELATED TO WOMEN</option>
+                    <option value="SEXUAL CRIMES">SEXUAL CRIMES</option>
+                    <option value="CASES OF HURT">CASES OF HURT</option>
+                    <option value="CRIMES RELATED TO MARRIAGE">CRIMES RELATED TO MARRIAGE</option>
+                    <option value="BURGLARY - NIGHT">BURGLARY - NIGHT</option>
+                    <option value="BURGLARY - DAY">BURGLARY - DAY</option>
+                    <option value="KIDNAPPING AND ABDUCTION">KIDNAPPING AND ABDUCTION</option>
+                    <option value="THEFT">THEFT</option>
+                    <option value="CYBER CRIME">CYBER CRIME</option>
+                    <option value="Counterfeiting">Counterfeiting</option>
+                    <option value="CRIMINAL TRESPASS">CRIMINAL TRESPASS</option>
+                    <option value="CRIMINAL INTIMIDATION">CRIMINAL INTIMIDATION</option>
+                    <option value="ROBBERY">ROBBERY</option>
+                    <option value="DACOITY">DACOITY</option>
+                    <option value="ARSON">ARSON</option>
+                    <option value="DRUGS">DRUGS</option>
+                    <option value="CRIMES RELATED TO TR">CRIMES RELATED TO TRAFFICKING</option>
+
+                </select>
+                <input type="submit" value="predict">
+            </form>
+
+        </div>
+
+        <div id="map2">
+
+
+        </div>
+
+
+
+        <div class="b2"></div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+    <script>
+        document.getElementById('crime-form').addEventListener('submit', function (event) {
+            document.getElementById("map2").innerHTML = ''
+            if (document.getElementById('analyse')) {
+                document.body.removeChild(document.getElementById('analyse'))
+            }
+            event.preventDefault();
+            const formData = new FormData(this);
+            const jsonObject = {};
+            formData.forEach(function (value, key) {
+                jsonObject[key] = value;
+            });
+            fetch('/predict5', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonObject),
+            })
+                .then(response => response.json())
+                .then(data => {
+
+                    pred = data[0]
+                    map2 = data[1]
+
+
+                    // document.getElementById('prediction-result').innerHTML = resultHtml;
+                    document.getElementById('map2').innerHTML = map2;
+                    var newDiv = document.createElement("div");
+                    newDiv.innerHTML = ` 
+            <div class="card2">
+            <h1>Previous Beat Performance</h1>
+            <form id='plot' >
+                <label for="Village_Area_Name" class='Heading' style="font-size:20px">Village Name:</label>
+                <div id="village"></div>
+            
+                <label for="Beat" class='Heading' style="font-size:20px">Beat No.:</label>
+                <select id="beat" name="beat" style="width:80%">
+                    
+                </select>
+                <input type="submit" value="GO" style="width:80%">
+            </form>
+            
+            </div>
+            <div id='graph_p'>
+                
+                </div>`
+                    newDiv.id = 'analyse'
+                    document.body.appendChild(newDiv)
+                    selectElement1 = document.getElementById('village')
+                    selectElement2 = document.getElementById('beat')
+
+                    l1 = data[2]
+                    time=['12:00 am-4:00 am','4:00 am-8:00 am','8:00 am-12:00 pm','12:00 pm-4:00 pm', "4:00 pm-8:00 pm","8:00 pm -12:00 am"]
+                    time_name=['Late Night','Early Morning','Morning','Noon','Afternoon','Evening']
+                    const zippedArray = pred.map((value, index) => [value, l1[index]])
+                    var i = 1
+                    zippedArray.forEach(([p, option,t]) => {
+
+
+                        var optionElement = document.createElement('input');
+                        optionElement.type = 'radio'
+                        optionElement.name = 'Village_Area_Name'
+                        optionElement.value = option;
+
+                        if (i == 1) {
+                            optionElement.checked = true
+
+                        }
+                        i = i + 1
+                        let index = time_name.findIndex(element => element==p['Time'] );
+                        var textElement = document.createElement('label')  // Set the value attribute
+                        textElement.innerHTML = option.concat("       (", p['Time']," - ",time[index], ")");
+
+
+                        var labelElement = document.createElement('div')  // Set the value attribute
+
+                        labelElement.className = 'Radio'
+                        labelElement.appendChild(optionElement)
+
+                        labelElement.appendChild(textElement)
+                        selectElement1.appendChild(labelElement);
+
+
+                    });
+                    l2 = data[3]
+                    l2.forEach(function (option) {
+                        var optionElement = document.createElement('option');
+                        optionElement.value = option;  // Set the value attribute
+                        optionElement.textContent = option.slice(0, -2);  // Set the text content
+                        selectElement2.appendChild(optionElement);
+
+                    });
+                    function handleRadioChange(event) {
+                        // Get the value of the selected radio button
+                        const selectedValue = event.target.value;
+
+                        // Display the selected value
+
+
+
+
+                        // Send selected option to Flask route using AJAX
+                        fetch('/process_option1', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ selectedOption: selectedValue }),
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+
+                                l = data['items2']
+                                selectElement = document.getElementById('beat')
+                                selectElement.innerHTML = ''
+                                l.forEach(function (option) {
+                                    var optionElement = document.createElement('option');
+                                    optionElement.value = option;  // Set the value attribute
+                                    optionElement.textContent = option.slice(0, -2);  // Set the text content
+                                    selectElement.appendChild(optionElement);  // Append the option to the select element
+                                });
+
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+
+                    const radios = document.getElementsByName('Village_Area_Name')
+                    for (const radio of radios) {
+                        radio.addEventListener('change', handleRadioChange);
+                    }
+
+                    document.getElementById('plot').addEventListener('submit', function (event1) {
+                        event1.preventDefault();
+                        const formData = new FormData(document.getElementById('plot'));
+                        const jsonObject1 = Object.fromEntries(formData);
+                        fetch('/graph', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(jsonObject1),
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+
+                                l = data
+                                document.getElementById("graph_p").innerHTML = ''
+                                const canvas = document.createElement('canvas')
+                                canvas.id = 'graph'
+                                document.getElementById("graph_p").appendChild(canvas)
+                                var graph = canvas.getContext('2d');
+                                var linechart = new Chart(graph, {
+                                    type: "line",
+                                    data: {
+                                        labels: data[0],
+                                        datasets: [
+                                            {
+                                                label: 'Crime Count under the Beat',
+                                                data: data[1],
+                                                fill: false,
+                                                borderColor: "skyblue",
+                                                tension: 0.1
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        responsive: false,
+                                        scales: {
+                                            y: {
+                                                ticks: {
+                                                    color: 'white' // Change color of y-axis ticks
+                                                },
+                                                title: {
+                                                    display: true,
+
+                                                    color: 'white'// Y-axis title
+                                                }
+                                            },
+                                            x: {
+                                                ticks: {
+                                                    color: 'white' // Change color of y-axis ticks
+                                                }
+                                            }
+                                        },
+                                        
+                                      
+
+                                    }
+
+                                });
+
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+
+
+                    })
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+
+        })
+    </script>
+    <script>
+
+    </script>
+
+
+    <script src="{{ url_for('static', filename='assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+</body>
+
+</html>
