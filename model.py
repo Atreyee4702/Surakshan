@@ -4,27 +4,17 @@ from joblib import load
 import numpy as np
 app = Flask(__name__)
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import LabelEncoder
 from joblib import dump
 import pandas as pd
 import numpy as py
 import osmnx as ox
 import networkx as nx
 import folium
-import webview
 import random
 from folium.plugins import HeatMap
 import numpy as np
-import plotly.graph_objs as go
 import requests
 import json
-import plotly
 import joblib
 # Load the dataset (assuming df is already loaded)
 # Replace 'your_dataset.csv' with the actual file path if needed
