@@ -78,19 +78,19 @@ A thorough Crime Prediction Model is presented by Team Sherlocked to predict cri
 
 
 3. **Predictive Analytics**
-   - Accused-Victim Demographics
+   - __Accused-Victim Demographics__
      ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/4c63b431-0215-4fa9-b2df-729e487c3106)
 
 
-   - Crime Time
+   - __Crime Time__
     ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/86fe1748-592a-4b13-b5d7-ee816ee1b187)
 
 
 
-   - Crime Hotspots
+   - __Crime Hotspots__
      ![image](https://github.com/sdjbabin/Surakshan/assets/137878044/aaabb895-48dc-4201-acdf-89741fe570b0)
 
-   - Crime Type
+   - __Crime Type__
     ![image](https://github.com/Atreyee4702/Surakshan/assets/144601619/37924aa5-5003-4db3-aab6-ba29c862ba86)
 
 
