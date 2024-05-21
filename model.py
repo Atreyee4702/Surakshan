@@ -4,17 +4,27 @@ from joblib import load
 import numpy as np
 app = Flask(__name__)
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import LabelEncoder
 from joblib import dump
 import pandas as pd
 import numpy as py
 import osmnx as ox
 import networkx as nx
 import folium
+import webview
 import random
 from folium.plugins import HeatMap
 import numpy as np
+import plotly.graph_objs as go
 import requests
 import json
+import plotly
 import joblib
 # Load the dataset (assuming df is already loaded)
 # Replace 'your_dataset.csv' with the actual file path if needed
@@ -23,17 +33,30 @@ def index():
     
     return render_template('index.html')
 
+
 @app.route('/criminal')
 def criminal():
     
-    return render_template('criminal.html')
+    return render_template('buffer1.html')
 
 @app.route('/victim')
 def victim():
     
-    return render_template('victim.html')
+    return render_template('buffer2.html')
 @app.route('/crimewatch')
 def crimewatch():
+    
+    return render_template('buffer3.html')
+@app.route('/victim_dash')
+def victim_dash():
+    
+    return render_template('victim.html')
+@app.route('/criminal_dash')
+def criminal_dash():
+    
+    return render_template('criminal.html')
+@app.route('/crime_dash')
+def crime_dash():
     
     return render_template('crime.html')
 
