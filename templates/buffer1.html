@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Credentials</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .credentials-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .credentials-container h2 {
+            margin-bottom: 20px;
+        }
+        .credentials-container p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .credentials-container button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 2%;
+        }
+        .credentials-container button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="credentials-container">
+        <h2>Login Credentials</h2>
+        <p>PLease use thsi login credentials in the next page to view the dashboard</p>
+        <p style='margin-top: 5%;'><strong>Username:</strong> sohamtinni@zohomail.in</p>
+        <p><strong>Password:</strong> TeamSherlocked@2002</p>
+        <form action="{{ url_for('criminal_dash') }}" method="get">
+            <button type="submit">Proceed</button>
+        </form>
+        <p style='font-size: 12px; margin-top: 5%;'><strong>Note:</strong> PLease click the back button twice to go back from the Dashboard to the home page of Surakshan</p>
+    </div>
+
+    <script>
+        function proceed() {
+           
+        }
+    </script>
+</body>
+</html>
